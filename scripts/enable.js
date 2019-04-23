@@ -11,4 +11,4 @@ async function main () {
   await dnsEditor.load([NS])
 }
 
-main()
+module.exports = main

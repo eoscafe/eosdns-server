@@ -6,4 +6,4 @@ async function main () {
   await dnsEditor.recover()
 }
 
-main()
+module.exports = main

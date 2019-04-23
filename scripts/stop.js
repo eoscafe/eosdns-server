@@ -1,11 +1,8 @@
 const kill = require('kill-port')
-require('./reset');
+const reset = require('./reset');
 
 (async () => {
-  try {
-    await kill(53)
-  } catch (e) {
-    console.log(e)
-  }
+  await kill(53)
+  await reset()
   process.exit(0)
 })()
