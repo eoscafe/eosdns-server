@@ -200,9 +200,9 @@ ecurve@^1.0.5:
     bigi "^1.1.0"
     safe-buffer "^5.0.1"
 
-edit-dns@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/edit-dns/-/edit-dns-1.0.7.tgz#8bbb9a3c9c0bb58bacb62c5607d62e6dbcaf768e"
+edit-dns@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/edit-dns/-/edit-dns-1.0.8.tgz#e41bdc21297684ff4d7c3abc7ad59477bf47a22c"
   dependencies:
     exec-root "^1.0.4"
 
