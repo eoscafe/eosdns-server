@@ -1,5 +1,5 @@
 const kill = require('kill-port')
-const RecursiveServer = require('./src/server')
+const RecursiveServer = require('../src/server')
 const NODE_URL = process.env.NODE_URL
 require('./enable');
 
