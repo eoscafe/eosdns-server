@@ -8,6 +8,7 @@ const enable = require('./enable');
   await enable()
 
   const recursiveServer = new RecursiveServer({
+    host: '0.0.0.0',
     port: 53,
     nodeUrl: NODE_URL
   })
