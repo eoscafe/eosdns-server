@@ -172,7 +172,13 @@ class RecursiveServer extends DNSServer {
 
       let rows = await this.eos.getRecords(accountName)
       rows = rows.filter(row => row.type === type)
-      const answer = rows.map(row => addEosDnsAttributes(row))
+      const answer = rows.map(row => {
+        row = addEosDnsAttributes(row)
+        if (row.name) {
+          row.name = qs.name
+        }
+        return row
+      })
       const res = new Message()
 
       res.aa = true
