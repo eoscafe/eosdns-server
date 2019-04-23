@@ -1,9 +1,3 @@
-/*!
- * dns.js - dns server for hsd
- * Copyright (c) 2017-2018, Christopher Jeffrey (MIT License).
- * https://github.com/handshake-org/hsd
- */
-
 'use strict'
 
 const assert = require('bsert')
@@ -11,57 +5,18 @@ const IP = require('binet')
 const Logger = require('blgr')
 const bns = require('bns')
 const secp256k1 = require('bcrypto/lib/secp256k1')
-// const LRU = require('blru')
-// const Resource = require('./resource')
 const addEosDnsAttributes = require('./parseEosDns')
+const { RES_OPT } = require('../constants')
+
 const { DNSServer, hsig, wire, util, StubResolver } = bns
 
 const EosApi = require('./eos')
 const {
   Message,
-  // types,
   typesByVal,
   codes,
   opcodes
 } = wire
-
-/*
- * Constants
- */
-const RES_OPT = { inet6: false, tcp: true }
-
-/**
- * RootCache
- */
-
-// class RootCache {
-//   constructor (size) {
-//     this.cache = new LRU(size)
-//   }
-
-//   set (name, type, msg) {
-//     const key = toKey(name, type)
-//     const raw = msg.compress()
-
-//     this.cache.set(key, {
-//       time: Date.now(),
-//       raw
-//     })
-
-//     return this
-//   }
-
-//   get (name, type) {
-//     const key = toKey(name, type)
-//     const item = this.cache.get(key)
-
-//     if (!item) return null
-
-//     if (Date.now() > item.time + 6 * 60 * 60 * 1000) return null
-
-//     return Message.decode(item.raw)
-//   }
-// }
 
 /**
  * RecursiveServer
@@ -236,65 +191,5 @@ class RecursiveServer extends DNSServer {
     }
   }
 }
-
-/*
- * Helpers
- */
-
-// function toKey (name, type) {
-//   let labels = util.countLabels(name)
-//   let ref = false
-
-//   switch (labels) {
-//     case 0:
-//     case 1:
-//       ref = false
-//       break
-//     case 2:
-//       ref = !Resource.isPointer(name)
-//       break
-//     case 3:
-//       switch (type) {
-//         case types.SRV: {
-//           ref = !Resource.isSRV(name)
-//           break
-//         }
-//         case types.TLSA: {
-//           ref = !Resource.isTLSA(name)
-//           break
-//         }
-//         case types.SMIMEA: {
-//           ref = !Resource.isSMIMEA(name)
-//           break
-//         }
-//         case types.OPENPGPKEY: {
-//           ref = !Resource.isOPENPGPKEY(name)
-//           break
-//         }
-//         default: {
-//           ref = true
-//           break
-//         }
-//       }
-//       break
-//     default:
-//       ref = true
-//       break
-//   }
-
-//   if (ref) labels = 1
-
-//   const label = util.from(name, -labels, name)
-
-//   // Ignore type if we're a referral.
-//   if (ref) return label.toLowerCase()
-
-//   let key = ''
-//   key += label.toLowerCase()
-//   key += ';'
-//   key += type.toString(10)
-
-//   return key
-// }
 
 module.exports = RecursiveServer

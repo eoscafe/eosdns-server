@@ -32,7 +32,7 @@ bcrypto@^3.1.5, bcrypto@~3.1.0:
     loady "~0.0.1"
     nan "^2.13.1"
 
-bfile@^0.2.1, bfile@~0.2.1:
+bfile@~0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/bfile/-/bfile-0.2.1.tgz#2d19ac27f355fef861d5d1a4cd0e4a7f27bb4151"
 
@@ -93,7 +93,7 @@ browserify-aes@^1.0.6:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-bs32@^0.1.5, bs32@~0.1.5:
+bs32@~0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/bs32/-/bs32-0.1.5.tgz#b36da53d547e60282ae3225219331f7cfa77a22d"
   dependencies:
@@ -109,14 +109,6 @@ bsert@^0.0.10, bsert@~0.0.10:
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/bsert/-/bsert-0.0.10.tgz#231ac82873a1418c6ade301ab5cd9ae385895597"
 
-bstring@^0.3.8:
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/bstring/-/bstring-0.3.8.tgz#eb44a830b2ea63b7f1b9004a165cd19ed63da3a7"
-  dependencies:
-    bsert "~0.0.10"
-    loady "~0.0.1"
-    nan "^2.13.1"
-
 btcp@~0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/btcp/-/btcp-0.1.5.tgz#f76262415a0f6eaa592cdbb91c8b18386530ac28"
@@ -129,7 +121,7 @@ buffer-xor@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/buffer-xor/-/buffer-xor-1.0.3.tgz#26e61ed1422fb70dd42e6e36729ed51d855fe8d9"
 
-bufio@^1.0.6, bufio@~1.0.6:
+bufio@~1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/bufio/-/bufio-1.0.6.tgz#e0eb6d70b2efcc997b6f8872173540967f90fa4d"
 

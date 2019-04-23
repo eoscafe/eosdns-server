@@ -1,5 +1,5 @@
 const { JsonRpc } = require('eosjs')
-const { DNS_CONTRACT, DNS_TABLE } = require('./constants')
+const { DNS_CONTRACT, DNS_TABLE } = require('../constants')
 const fetch = require('node-fetch')
 
 class EosApi {
