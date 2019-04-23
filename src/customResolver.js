@@ -175,6 +175,7 @@ class RecursiveServer extends DNSServer {
       const answer = rows.map(row => addEosDnsAttributes(row))
       const res = new Message()
 
+      res.aa = true
       res.id = util.id()
       res.opcode = opcodes.QUERY
       res.code = codes.NOERROR
