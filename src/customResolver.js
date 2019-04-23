@@ -165,7 +165,7 @@ class RecursiveServer extends DNSServer {
     
     const [, accountName] = qs.name
       .toLowerCase()
-      .match(/(^[^/]+).eosdns.io.$/) || [null, null]
+      .match(/(^[^/]+).eosdns.link.$/) || [null, null]
 
     if (accountName) {
       console.log('Resolved by EOS:', qs)
