@@ -6,7 +6,7 @@ async function main () {
   await dnsEditor.recover()
 
   // Delete saved file
-  await editDns.deleteDataFile()
+  await dnsEditor.deleteDataFile()
 
   process.exit(0)
 }
