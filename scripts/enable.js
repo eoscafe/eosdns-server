@@ -9,6 +9,8 @@ async function main () {
 
   // Load new DNS settings
   await dnsEditor.load([NS])
+
+  process.exit(0)
 }
 
-module.exports = main
+main()

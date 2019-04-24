@@ -1,8 +1,14 @@
 const kill = require('kill-port')
-const reset = require('./reset');
+const DnsEditor = require('edit-dns')
+const dnsEditor = new DnsEditor('EOSDNS')
 
-(async () => {
+async function main () {
   await kill(53)
-  await reset()
+
+  // Recover saved settings
+  await dnsEditor.recover()
+
   process.exit(0)
-})()
+}
+
+main()
