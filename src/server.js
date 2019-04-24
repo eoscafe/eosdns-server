@@ -6,9 +6,9 @@ const Logger = require('blgr')
 const bns = require('bns')
 const secp256k1 = require('bcrypto/lib/secp256k1')
 const addEosDnsAttributes = require('./parseEosDns')
-const { RES_OPT } = require('../constants')
+const { RES_OPT, CUSTOM_RESOLVER_DOMAIN } = require('../constants')
 
-const { DNSServer, hsig, wire, util, StubResolver } = bns
+const { DNSServer, hsig, wire, util, StubResolver, Zone } = bns
 
 const EosApi = require('./eos')
 const {
@@ -117,9 +117,9 @@ class RecursiveServer extends DNSServer {
     })
 
     this.on('query', (req, res, rinfo) => {
-      console.log('DNS Request:', req)
-      console.log('DNS Response:', res)
-      console.log('R Info:', rinfo)
+      // console.log('DNS Request:', req)
+      // console.log('DNS Response:', res)
+      // console.log('R Info:', rinfo)
     })
 
     return this
@@ -156,38 +156,55 @@ class RecursiveServer extends DNSServer {
     await super.close()
   }
 
+  parseEosDomain (fqdn) {
+    assert(util.isFQDN(fqdn))
+
+    const TLD = `eos`
+    const nameSplit = util.splitName(fqdn)
+    
+    assert(nameSplit.length >= 2)
+
+    // TLD is .eos
+    if (nameSplit[nameSplit.length - 1] === TLD) {
+      // Return eoscafeblock from eoscafeblock.eos 
+      return nameSplit[nameSplit.length - 2]
+    } else {
+      return undefined
+    }
+  }
+
+  generalResolve (qs) {
+    return this.resolver.resolve(qs)
+  }
+
   async resolve (req, rinfo) {
     const [qs] = req.question
-    const type = typesByVal[qs.type]
+    const { name, type } = qs;
+    const typeName = typesByVal[type]
 
-    const [, accountName] = qs.name
-      .toLowerCase()
-      .match(/(^[^/]+).eos.$/) || [null, null]
-
+    const zone = new Zone('.');
+    const accountName = this.parseEosDomain(name)
     if (accountName) {
-      console.log('Resolved by EOS:', qs)
+      console.log('Account Name:', accountName)
+      console.log('Question for EOS:', qs)
 
-      let rows = await this.eos.getRecords(accountName)
-      rows = rows.filter(row => row.type === type)
-      const answer = rows.map(row => addEosDnsAttributes(row))
-      const res = new Message()
+      const records = (await this.eos.getRecords(accountName))
+        .filter(record => record.type === typeName)
+        .map(record => addEosDnsAttributes(record))
 
-      res.id = util.id()
-      res.opcode = opcodes.QUERY
-      res.code = codes.NOERROR
-      res.qr = true
-      res.rd = true
-      res.ra = true
-      res.ad = true
-      res.question = [qs]
-      res.answer = answer
+      if (records && records.length) {
+        for (const record of records) {
+          zone.insert(record)
+        }
+      } else {
+        return this.generalResolve(qs)
+      }
 
-      return res
-    } else {
-      console.log('Resolved by default:', qs)
-
-      const resolved = await this.resolver.resolve(qs)
+      // Resolve answer
+      const resolved = zone.resolve(name, type);
       return resolved
+    } else {
+      return this.generalResolve(qs)
     }
   }
 }

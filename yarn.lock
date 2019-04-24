@@ -200,11 +200,11 @@ ecurve@^1.0.5:
     bigi "^1.1.0"
     safe-buffer "^5.0.1"
 
-edit-dns@^1.0.12:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/edit-dns/-/edit-dns-1.0.12.tgz#78980abfaab2e258cc0b49add2e6fbc8f0e49cd3"
+edit-dns@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/edit-dns/-/edit-dns-1.1.4.tgz#46f1dc063784b99283945f2918234fdd991899b5"
   dependencies:
-    exec-root "^1.0.4"
+    exec-root "^1.0.5"
 
 eosjs-ecc@4.0.4:
   version "4.0.4"
@@ -234,9 +234,9 @@ evp_bytestokey@^1.0.3:
     md5.js "^1.3.4"
     safe-buffer "^5.1.1"
 
-exec-root@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/exec-root/-/exec-root-1.0.4.tgz#b66369d3585558cfb5a5f2c442217c0d5612a578"
+exec-root@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/exec-root/-/exec-root-1.0.5.tgz#6c1b79b01ebbdffe24cf6dda6291589e081442bd"
 
 eyes@0.1.x, eyes@~0.1.8:
   version "0.1.8"

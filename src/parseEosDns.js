@@ -126,7 +126,6 @@ module.exports = function (record) {
     break
   }
   rr.data = rd
-  console.log(rr)
 
   return rr
 }
