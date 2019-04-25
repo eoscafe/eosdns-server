@@ -22,6 +22,9 @@ exitHook.uncaughtExceptionHandler((err, callback) => {
 exitHook.unhandledRejectionHandler((err, callback) => {
   exit(err, callback)
 });
+exitHook(callback => {
+  exit('ExitHookErr', callback)
+})
 
 async function main () {
   await kill(53)
