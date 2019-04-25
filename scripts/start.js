@@ -7,12 +7,21 @@ const dnsEditor = new DnsEditor('EOSDNS')
 
 const NS = '127.0.0.1'
 
-async function exit (err) {
+async function exit (err, callback) {
   console.log(err)
-  await dnsEditor.recover()
+  try {
+    await dnsEditor.recover()
+  } catch (e) {
+    console.log(e)
+  }
+  callback()
 }
-exitHook.uncaughtExceptionHandler(async err => await exit(err));
-exitHook.unhandledRejectionHandler(async err => await exit(err));
+exitHook.uncaughtExceptionHandler((err, callback) => {
+  exit(err, callback)
+});
+exitHook.unhandledRejectionHandler((err, callback) => {
+  exit(err, callback)
+});
 
 async function main () {
   await kill(53)
