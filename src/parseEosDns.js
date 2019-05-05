@@ -92,7 +92,7 @@ module.exports = function (record) {
 
   case 'TXT':
     rd = new TXTRecord()
-    rd.txt = record.value
+    rd.txt.push(record.value)
     break
 
   case 'SRV':
