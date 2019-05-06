@@ -1,6 +1,6 @@
 const socks = require('socksv5')
 
-const PORT = 8000
+const PORT = process.env.SOCKS_PORT
 
 const srv = socks.createServer((info, accept, deny) => accept());
 

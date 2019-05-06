@@ -8,6 +8,8 @@ const { wire: { Record, KSK_2010 } } = require('bns');
 const exitHook = require('../src/asyncExit');
 const dnsEditor = new DnsEditor('EOSDNS')
 
+const MAIN_PORT = 53
+const SIDE_PORT = 5301
 const NS = '127.0.0.1'
 
 // async function exit (err, callback) {
@@ -49,7 +51,7 @@ async function auth () {
   authServer.setOrigin('.');
   console.log(authServer)
 
-  await authServer.bind(5301, '127.0.0.1');
+  await authServer.bind(SIDE_PORT, '127.0.0.1');
 }
 
 async function recursive () {
@@ -75,17 +77,22 @@ async function recursive () {
     Record.fromString(KSK_2010)
   );
 
-  await recServer.bind(53, '127.0.0.1');
+  await recServer.bind(MAIN_PORT, '127.0.0.1');
 }
 
 async function main () {
-  await kill(53)
+  try {
+    await kill(MAIN_PORT)
+    await kill(SIDE_PORT)
 
-  // Saves current DNS settings
-  await dnsEditor.save()
-
-  // Load new DNS settings
-  await dnsEditor.load([NS])
+    // Saves current DNS settings
+    await dnsEditor.save()
+  
+    // Load new DNS settings
+    await dnsEditor.load([NS])
+  } catch (e) {
+    console.log(e)
+  }
 
   // Start server
   await auth()

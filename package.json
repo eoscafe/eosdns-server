@@ -4,6 +4,8 @@
   "description": "",
   "main": "scripts/start.js",
   "scripts": {
+    "start:dns": "node scripts/start.js",
+    "start:socks": "node socks/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

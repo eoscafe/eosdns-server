@@ -1,0 +1,20 @@
+{
+    "apps": [
+        {
+            "name": "eos-dns",
+            "script": "npm",
+            "args": "run start:dns",
+            "env": {
+                "NODE_URL": "https://eos.greymass.com"
+            }
+        },
+        {
+            "name": "eos-socks",
+            "script": "npm",
+            "args": "run start:socks",
+            "env": {
+                "SOCKS_PORT": 7353
+            }
+        }
+    ]
+}
