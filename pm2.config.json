@@ -5,7 +5,7 @@
             "script": "npm",
             "args": "run start:dns",
             "env": {
-                "NODE_URL": "https://eos.greymass.com"
+                "NODE_URL": "https://api.jungle.alohaeos.com"
             }
         },
         {
